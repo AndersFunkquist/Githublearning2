@@ -1,0 +1,30 @@
+---
+title: "Gitlearning"
+author: "Anders"
+date: "2023-11-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(renv)
+renv::init()
+
+#renv::install(c('ggplot2','dplyr','tidyr'))
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r}
+set.seed(456)
+data <- data.frame(x=rnorm(100), category=sample(c('A','B','C'),100, replace = T)) %>% mutate(y=2*x+rnorm(100))
+```
+
+```{r}
+data_summary <- data %>% group_by(category) %>% summarise(mean_x = mean(x), sd_y = sd(y), n = n())
+print(data_summary)
+```
